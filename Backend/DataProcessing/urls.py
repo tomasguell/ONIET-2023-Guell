@@ -19,5 +19,10 @@ urlpatterns = [
         RegistroListCreateView.as_view(),
         name="RegistroListCreateView",
     ),
-    path('dataProccessing/', dataProccessing, name='dataProccessing')
+    path('dataProccessing/', dataProccessing, name='dataProccessing'),
+    path(
+        "RegistrosEmpresa/<int:Empresa_id>",
+        RegistroListCreateView.as_view(),
+        name="RegistroListCreateView",
+    ),
 ]

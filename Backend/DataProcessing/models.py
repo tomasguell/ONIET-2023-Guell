@@ -16,6 +16,7 @@ class Registro(models.Model):
         verbose_name="Mes",
         validators=[MinValueValidator(1), MaxValueValidator(12)]
     )
+    empresa = models.ForeignKey(Empresa, on_delete=models.CASCADE)
     ProduccionTotal = models.IntegerField(verbose_name="Produccion Total")
     CantidadPiezasConFallas = models.IntegerField(verbose_name="Cantidad de piezas con fallas")
     def __str__(self):

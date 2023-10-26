@@ -1,5 +1,8 @@
 import './App.css';
 import HomePage from './pages/home';
+import Empresas from './pages/Empresas';
+
+
 import {
   BrowserRouter as Router,
   Routes,
@@ -15,7 +18,7 @@ function App() {
         <div >
           <Routes>
             <Route path="/" element={<HomePage/>} />
-            
+            <Route path="/Empresas" element={<Empresas/>} />
           </Routes>
         </div>
       </div>

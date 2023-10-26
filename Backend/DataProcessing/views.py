@@ -6,7 +6,7 @@ from rest_framework.filters import OrderingFilter
 from rest_framework.permissions import IsAuthenticated
 from datetime import datetime, date
 from rest_framework.views import APIView  # Import APIView from rest_framework
-
+from rest_framework.decorators import api_view
 from .models import (
     Empresa,
     Registro
@@ -85,3 +85,20 @@ def dataProccessing(request):
     
 
     
+    
+    
+    
+    
+@api_view(["GET"])
+def RegistrosEmpresa(request, Empresa_id):
+    if request.method == "GET":
+        queryset = Registro.objects.filter(empresa=Empresa_id)
+
+
+        serializer = RegistroSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+    if request.method == "POST":
+        return Response({"message": "Notificaciones agregada"})
+
+    return Response(status=405)
