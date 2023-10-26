@@ -38,11 +38,11 @@ def dataProccessing(request):
             # empresas = Empresa.objects.all()
             # registros = Registro.objects.all()
             
-            csv_filename = 'Datos-ONIET---Hoja-1.csv'
-            csv_directory = 'C:/Users/facun/OneDrive/Documentos/Extra Projects/ONIET-2023/ONIET-2023-Guell/Backend/DataProcessing'
-            csv_path = os.path.join(csv_directory, csv_filename)
+            csv_filename = 'Backend/DataProcessing/Datos-ONIET---Hoja-1.csv'
+            # csv_directory = 'C:/Users/facun/OneDrive/Documentos/Extra Projects/ONIET-2023/ONIET-2023-Guell/Backend/DataProcessing'
+            # csv_path = os.path.join(csv_directory, csv_filename)
 
-            df = pd.read_csv(csv_path, on_bad_lines='skip')
+            df = pd.read_csv(csv_filename, on_bad_lines='skip')
 
             empresas = {}
             for row in df.iloc:
