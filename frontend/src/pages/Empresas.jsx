@@ -5,7 +5,7 @@ import { useEffect,useState, React } from 'react';
 
 
 
-function HomePage() {
+function Empresas() {
 
     const [data, setData] = useState(null); // Estado para almacenar los datos
     const [loading, setLoading] = useState(true); // Estado para controlar la carga
@@ -47,4 +47,4 @@ function HomePage() {
   );
 }
 
-export default HomePage;
+export default Empresas;
