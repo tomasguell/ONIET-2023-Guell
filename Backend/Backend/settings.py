@@ -108,9 +108,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = "en-us"
+LANGUAGE_CODE = "es"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "America/Cordoba"
 
 USE_I18N = True
 
@@ -185,23 +185,7 @@ JAZZMIN_SETTINGS = {
 
     # List of apps (and/or models) to base side menu ordering off of (does not need to contain all apps/models)
     "order_with_respect_to": ["auth", "books", "books.author", "books.book"],
-
-
-    #aca van los de la navar
-    "topmenu_links": [
-
-        # external url that opens in a new window (Permissions can be added)
-        {"name": "Tienda ", "url": "http://127.0.0.1:3000/tienda", "new_window": False},
-
-        # external url that opens in a new window (Permissions can be added)
-        {"name": "Presupuesto", "url": "http://127.0.0.1:3000/presupuesto", "new_window": False},
-
-        # external url that opens in a new window (Permissions can be added)
-        {"name": "Prestamo", "url": "http://127.0.0.1:3000/prestamo", "new_window": False},
-
         
-
-    ],
     # Custom links to append to app groups, keyed on app name
     "custom_links": {
         "books": [{
@@ -219,17 +203,7 @@ JAZZMIN_SETTINGS = {
         "auth.user": "fas fa-user",
         "auth.Group": "fas fa-users",
         "ElectroStockApp.Box":"fas fa-box",
-        "ElectroStockApp.Location":"fas fa-map-marker-alt",
-        "ElectroStockApp.CustomUser":"fas fa-user",
-        "ElectroStockApp.Category":"fas fa-ellipsis-h",
-        "ElectroStockApp.Element":"fas fa-hammer",
-        "ElectroStockApp.Log":"fas fa-exchange-alt",
-        "ElectroStockApp.Laboratory":"fas fa-flask",
-        "ElectroStockApp.TokenSignup":"fas fa-user-secret",
-        "ElectroStockApp.Speciality":"fas fa-hard-hat",
-        "ElectroStockApp.Course":"fas fa-graduation-cap",
-        "token_blacklist.blacklistedtoken":"fas fa-lock",
-        "token_blacklist.outstandingtoken":"fas fa-lock",
+
     },
 
     # Icons that are used when one is not manually specified

@@ -20,8 +20,9 @@ class Registro(models.Model):
     ProduccionTotal = models.IntegerField(verbose_name="Produccion Total")
     CantidadPiezasConFallas = models.IntegerField(verbose_name="Cantidad de piezas con fallas")
     # def __str__(self):
+    #     return self.id
     #     return self.empresa
 
     class Meta:
-        verbose_name_plural = "Registros"
-        verbose_name = "Registro"
+            verbose_name_plural = "Registros"
+            verbose_name = "Registro"
