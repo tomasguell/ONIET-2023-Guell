@@ -80,6 +80,7 @@ def dataProccessing(request):
             rows = []
             for emp in empresas_proccessing:
                 index = {
+                    'id': 1,
                     'Empresa' : emp,
                     'Produccion Total': empresas_proccessing[emp]["Producción_Total"],
                     'Cantidad Piezas Ok': empresas_proccessing[emp]["Cantidad_Piezas_Ok"],
