@@ -26,3 +26,20 @@ class RegistroListCreateView(generics.ListCreateAPIView):
     queryset = Registro.objects.all()
     serializer_class = RegistroSerializer
     # permission_classes = [all]
+    
+    
+    
+    
+@api_view(["GET"])
+def RegistrosEmpresa(request, Empresa_id):
+    if request.method == "GET":
+        queryset = models.Registro.objects.filter(speciality__name=speciality_name)
+
+
+        serializer = BudgetSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+    if request.method == "POST":
+        return Response({"message": "Notificaciones agregada"})
+
+    return Response(status=405)

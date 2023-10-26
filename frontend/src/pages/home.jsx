@@ -31,18 +31,7 @@ function HomePage() {
   return (
     <div className='pagecontainer container'>
         <NavBar></NavBar>
-        {loading ? (
-        <p>Cargando...</p>
-      ) : data ? (
-        // Renderizar los datos una vez que la solicitud haya tenido éxito
-        <div>
-          <h2>Datos Recibidos:</h2>
-          <pre>{JSON.stringify(data, null, 2)}</pre>
-        </div>
-      ) : (
-        // Manejar el caso en el que no se recibieron datos
-        <p>No se recibieron datos.</p>
-      )}
+      Hola
     </div>
   );
 }
