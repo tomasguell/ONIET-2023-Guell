@@ -2,6 +2,9 @@ from django.contrib import admin
 from .models import *
 from import_export.admin import ImportExportActionModelAdmin
 from import_export import resources
+from import_export import resources
+from import_export.fields import Field
+from import_export.widgets import ForeignKeyWidget
 
 # Register your models here.
 
@@ -19,15 +22,70 @@ class EmpresaResource(resources.ModelResource):
 
 class EmpresaAdmin(ImportExportActionModelAdmin):
     resource_class = EmpresaResource
-    list_display = ["nombre", "id"]
+    list_display = ["nombre","ProduccionTotal","CantidadPiezasOK","CantidadPiezasError","PiezasOK","PiezasError"]
+    list_filter = (
+        "nombre",
+    )
+
+    def CantidadPiezasOK(self, obj):
+        produccion = Registro.objects.filter(empresa=obj).aggregate(
+            total=models.Sum("ProduccionTotal")
+        )["total"]
+        fallas = Registro.objects.filter(empresa=obj).aggregate(
+            total=models.Sum("CantidadPiezasConFallas")
+        )["total"]
+        if fallas is None:
+            fallas = 0
+        if produccion is None:
+            produccion = 0
+        stock = produccion - fallas
+        return stock
+
+    def CantidadPiezasError(self, obj):
+        fallas = Registro.objects.filter(empresa=obj).aggregate(
+            total=models.Sum("CantidadPiezasConFallas")
+        )["total"]
+        return fallas
+    
+    def ProduccionTotal(self, obj):
+        produccion = Registro.objects.filter(empresa=obj).aggregate(
+            total=models.Sum("ProduccionTotal")
+        )["total"]
+        return produccion
+
+    def PiezasOK(self, obj):
+        produccion = Registro.objects.filter(empresa=obj).aggregate(
+            total=models.Sum("ProduccionTotal")
+        )["total"]
+        fallas = Registro.objects.filter(empresa=obj).aggregate(
+            total=models.Sum("CantidadPiezasConFallas")
+        )["total"]
+        if fallas is None:
+            fallas = 0
+        if produccion is None:
+            produccion = 0
+        CantidadPiezasOK = produccion - fallas
+        print(CantidadPiezasOK, produccion)
+        PiezasOK = CantidadPiezasOK / produccion 
+        return PiezasOK
+    
+    def PiezasError(self, obj):
+        produccion = Registro.objects.filter(empresa=obj).aggregate(
+            total=models.Sum("ProduccionTotal")
+        )["total"]
+        fallas = Registro.objects.filter(empresa=obj).aggregate(
+            total=models.Sum("CantidadPiezasConFallas")
+        )["total"]
+        if fallas is None:
+            fallas = 0
+        if produccion is None:
+            produccion = 0
+        CantidadPiezasOK = produccion - fallas
+        PiezasOK = CantidadPiezasOK / produccion 
+        PiezasError= fallas / produccion
+        return PiezasError
 
 
-from django.db.models import Max
-from django.contrib.auth.hashers import make_password
-from import_export import resources, fields
-from import_export.widgets import ManyToManyWidget
-from import_export.fields import Field
-from import_export.widgets import ForeignKeyWidget
 class RegistroResource(resources.ModelResource):
     id = resources.Field(column_name="Registro", attribute="id")
     mes = resources.Field(column_name="Mes", attribute="mes")
@@ -51,7 +109,7 @@ class RegistroResource(resources.ModelResource):
 
 class RegistroAdmin(ImportExportActionModelAdmin):
     resource_class = RegistroResource
-    list_display = ["mes", "ProduccionTotal","CantidadPiezasConFallas"]
+    list_display = ["id","mes", "empresa","ProduccionTotal","CantidadPiezasConFallas"]
 
 
 admin.site.register(Empresa,EmpresaAdmin)

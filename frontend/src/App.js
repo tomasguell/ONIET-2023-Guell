@@ -1,6 +1,7 @@
 import './App.css';
 import HomePage from './pages/home';
 import Empresas from './pages/Empresas';
+import EmpresaDetalle from './pages/EmpresaDetalle';
 
 
 import {
@@ -19,6 +20,7 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage/>} />
             <Route path="/Empresas" element={<Empresas/>} />
+            <Route path="/Empresas/:id" element={<EmpresaDetalle/>} />
           </Routes>
         </div>
       </div>
