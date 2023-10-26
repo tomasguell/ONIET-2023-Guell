@@ -3,7 +3,8 @@ from rest_framework import routers
 from .views import (
     EmpresaListCreateView,
     RegistroListCreateView,
-    dataProccessing
+    dataProccessing,
+    RegistrosEmpresa
 )
 
 # router = routers.DefaultRouter()
@@ -22,7 +23,7 @@ urlpatterns = [
     path('dataProccessing/', dataProccessing, name='dataProccessing'),
     path(
         "RegistrosEmpresa/<int:Empresa_id>",
-        RegistroListCreateView.as_view(),
-        name="RegistroListCreateView",
+        RegistrosEmpresa,
+        name="RegistrosEmpresa",
     ),
 ]

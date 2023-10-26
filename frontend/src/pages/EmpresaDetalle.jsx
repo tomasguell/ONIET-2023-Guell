@@ -1,18 +1,18 @@
 import NavBar from './NavBar';
-import { useEffect,useState, React } from 'react';
-
+import { useEffect,useState,React } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 
 
 
 
 function Empresas() {
-
+    const { id } = useParams();
     const [data, setData] = useState(null); // Estado para almacenar los datos
     const [loading, setLoading] = useState(true); // Estado para controlar la carga
   
     useEffect(() => {
       // Realizar la solicitud fetch en el efecto de montaje
-      fetch('http://127.0.0.1:8000/api/EmpresaListCreateView/')
+      fetch(`http://127.0.0.1:8000/api/RegistrosEmpresa/${id}`)
         .then(response => response.json())
         .then(data => {
             console.log("a")
