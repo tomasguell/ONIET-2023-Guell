@@ -76,11 +76,22 @@ def dataProccessing(request):
                 empresas_proccessing[empresa]['CantidaPiezasError'] = Cantidad_de_Piezas_con_fallas
                 empresas_proccessing[empresa]['porcentaje_Piezas_Ok'] = porcentaje_Piezas_Ok
                 empresas_proccessing[empresa]['porcentaje_Piezas_Error'] = porcentaje_Piezas_Error
-                
-                
-            print(empresas_proccessing)
 
-            return JsonResponse({'code': 'Success', 'msg': empresas_proccessing})
+            rows = []
+            for emp in empresas_proccessing:
+                index = {
+                    'Empresa' : emp,
+                    'Produccion Total': empresas_proccessing[emp]["Producción_Total"],
+                    'Cantidad Piezas Ok': empresas_proccessing[emp]["Cantidad_Piezas_Ok"],
+                    'Cantidad Piezas Error': empresas_proccessing[emp]["CantidaPiezasError"],
+                    '%Piezas Ok': empresas_proccessing[emp]["porcentaje_Piezas_Ok"],
+                    '%Piezas Error': empresas_proccessing[emp]["porcentaje_Piezas_Error"],
+                }
+                rows.append(index)
+                
+            print(rows)
+
+            return JsonResponse({'code': 'Success', 'msg': rows})
         except json.JSONDecodeError as e:
             return JsonResponse({'code': 'error', 'message': 'Invalid JSON data'})
     else:
