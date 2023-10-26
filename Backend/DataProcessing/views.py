@@ -26,6 +26,65 @@ class RegistroListCreateView(generics.ListCreateAPIView):
     queryset = Registro.objects.all()
     serializer_class = RegistroSerializer
     # permission_classes = [all]
+
+import json
+from django.http import JsonResponse
+import os
+import pandas as pd
+
+def dataProccessing(request):
+    if request.method == 'GET':
+        try:   
+            # empresas = Empresa.objects.all()
+            # registros = Registro.objects.all()
+            
+            csv_filename = 'Datos-ONIET---Hoja-1.csv'
+            csv_directory = 'C:/Users/facun/OneDrive/Documentos/Extra Projects/ONIET-2023/ONIET-2023-Guell/Backend/DataProcessing'
+            csv_path = os.path.join(csv_directory, csv_filename)
+
+            df = pd.read_csv(csv_path, on_bad_lines='skip')
+
+            empresas = {}
+            for row in df.iloc:
+                row = row.to_dict()
+                try:
+                    empresas[row['Empresa']].append(row)
+                except KeyError:
+                    empresas[row['Empresa']] = []
+
+            empresas_proccessing = {}
+
+            for empresa in empresas:
+                # print(empresas[empresa])
+                Producción_Total = 0
+                Cantidad_de_Piezas_con_fallas = 0
+                for row in empresas[empresa]:
+                    Producción_Total += row['ProduccionTotal']
+                    Cantidad_de_Piezas_con_fallas += row['CantidaPiezasConFallas']
+                
+                
+                Cantidad_Piezas_Ok = Producción_Total - Cantidad_de_Piezas_con_fallas
+                porcentaje_Piezas_Ok = Cantidad_Piezas_Ok / Producción_Total
+                porcentaje_Piezas_Error = Cantidad_de_Piezas_con_fallas / Producción_Total
+
+                empresas_proccessing[empresa] = {}
+                empresas_proccessing[empresa]['Producción_Total'] = Producción_Total
+                empresas_proccessing[empresa]['Cantidad_Piezas_Ok'] = Cantidad_Piezas_Ok
+                empresas_proccessing[empresa]['CantidaPiezasError'] = Cantidad_de_Piezas_con_fallas
+                empresas_proccessing[empresa]['porcentaje_Piezas_Ok'] = porcentaje_Piezas_Ok
+                empresas_proccessing[empresa]['porcentaje_Piezas_Error'] = porcentaje_Piezas_Error
+                
+                
+            print(empresas_proccessing)
+
+            return JsonResponse({'code': 'Success', 'msg': empresas_proccessing})
+        except json.JSONDecodeError as e:
+            return JsonResponse({'code': 'error', 'message': 'Invalid JSON data'})
+    else:
+        return JsonResponse({'code': 'error', 'message': 'Invalid request method'})
+    
+
+    
     
     
     
