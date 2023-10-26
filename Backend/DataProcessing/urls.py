@@ -18,4 +18,9 @@ urlpatterns = [
         RegistroListCreateView.as_view(),
         name="RegistroListCreateView",
     ),
+    path(
+        "RegistrosEmpresa/<int:Empresa_id>",
+        RegistroListCreateView.as_view(),
+        name="RegistroListCreateView",
+    ),
 ]

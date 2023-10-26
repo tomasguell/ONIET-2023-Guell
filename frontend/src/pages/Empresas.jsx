@@ -29,8 +29,9 @@ function Empresas() {
 
   
   return (
-    <div className='pagecontainer container'>
+    <div >
         <NavBar></NavBar>
+        
         {loading ? (
         <p>Cargando...</p>
       ) : data ? (
