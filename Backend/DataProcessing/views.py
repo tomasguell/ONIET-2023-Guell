@@ -6,7 +6,7 @@ from rest_framework.filters import OrderingFilter
 from rest_framework.permissions import IsAuthenticated
 from datetime import datetime, date
 from rest_framework.views import APIView  # Import APIView from rest_framework
-
+from rest_framework.decorators import api_view
 from .models import (
     Empresa,
     Registro
@@ -33,10 +33,10 @@ class RegistroListCreateView(generics.ListCreateAPIView):
 @api_view(["GET"])
 def RegistrosEmpresa(request, Empresa_id):
     if request.method == "GET":
-        queryset = models.Registro.objects.filter(speciality__name=speciality_name)
+        queryset = Registro.objects.filter(empresa=Empresa_id)
 
 
-        serializer = BudgetSerializer(queryset, many=True)
+        serializer = RegistroSerializer(queryset, many=True)
         return Response(serializer.data)
 
     if request.method == "POST":
