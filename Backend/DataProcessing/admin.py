@@ -5,7 +5,6 @@ from import_export import resources
 
 # Register your models here.
 
-# Clase de import-export de curso
 class EmpresaResource(resources.ModelResource):
     class Meta:
         model = Empresa
@@ -18,12 +17,41 @@ class EmpresaResource(resources.ModelResource):
             "nombre",
         )
 
-
-# Clase de filtros y busqueda de Categoria
 class EmpresaAdmin(ImportExportActionModelAdmin):
     resource_class = EmpresaResource
     list_display = ["nombre", "id"]
 
 
+from django.db.models import Max
+from django.contrib.auth.hashers import make_password
+from import_export import resources, fields
+from import_export.widgets import ManyToManyWidget
+
+class RegistroResource(resources.ModelResource):
+    id = resources.Field(column_name="Registro", attribute="id")
+    mes = resources.Field(column_name="Mes", attribute="mes")
+    ProduccionTotal = resources.Field(column_name="ProduccionTotal", attribute="ProduccionTotal")
+    CantidadPiezasConFallas = resources.Field(column_name="CantidadPiezasConFallas", attribute="CantidadPiezasConFallas")
+    empresa = resources.Field(
+        column_name="Empresa",
+        attribute="empresa",
+    )
+
+    class Meta:
+        model = Registro
+        fields = (
+            "id",
+            "empresa",
+            "mes",
+            "ProduccionTotal",
+            "CantidadPiezasConFallas",
+        )
+        export_order = fields
+
+class RegistroAdmin(ImportExportActionModelAdmin):
+    resource_class = RegistroResource
+    list_display = ["mes", "ProduccionTotal","CantidadPiezasConFallas"]
+
+
 admin.site.register(Empresa,EmpresaAdmin)
-admin.site.register(Registro)
+admin.site.register(Registro,RegistroAdmin)
