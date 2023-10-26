@@ -38,7 +38,7 @@ def dataProccessing(request):
             # empresas = Empresa.objects.all()
             # registros = Registro.objects.all()
             
-            csv_filename = 'Backend/DataProcessing/Datos-ONIET---Hoja-1.csv'
+            csv_filename = './DataProcessing/Datos-ONIET---Hoja-1.csv'
             # csv_directory = 'C:/Users/facun/OneDrive/Documentos/Extra Projects/ONIET-2023/ONIET-2023-Guell/Backend/DataProcessing'
             # csv_path = os.path.join(csv_directory, csv_filename)
 
