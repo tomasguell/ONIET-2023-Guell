@@ -1,0 +1,46 @@
+from django.shortcuts import render
+
+# Create your views here.
+
+# import os
+# import pandas as pd
+
+# csv_filename = 'Datos-ONIET---Hoja-1.csv'
+# csv_directory = 'C:/Users/facun/OneDrive/Documentos/Extra Projects/ONIET-2023/ONIET-2023-Guell/Backend/DataProcessing'
+# csv_path = os.path.join(csv_directory, csv_filename)
+
+# df = pd.read_csv(csv_path, on_bad_lines='skip')
+# print(df)
+
+# last_row = df.iloc[len(df)-1].to_dict()
+# print('--------------')
+# print('--------------')
+# print('--------------')
+
+
+# # ranking de acuerdo al rendimiento de cada empresa.
+
+# Producción_Total
+# Cantidad_de_Piezas_con_fallas
+# Producción_Total
+# Cantidad_Piezas_Error
+# Producción_Total
+
+# Cantidad_Piezas_Ok = Producción_Total - Cantidad_de_Piezas_con_fallas
+# porcentaje_Piezas_Ok = Cantidad_Piezas_Ok / Producción_Total
+# porcentaje_Piezas_Error = Cantidad_Piezas_Error / Producción_Total
+
+# print(last_row)
+# ranking = {
+#     [
+#     'Empresa',
+#     'Producción Total',
+#     'Cantidad Piezas Ok',
+#     'Cantidad Piezas Error',
+#     '%Piezas Ok',
+#     '%Piezas Error'
+#     ]
+# }
+
+
+
