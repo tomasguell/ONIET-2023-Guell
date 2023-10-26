@@ -1,5 +1,5 @@
 import React from 'react';
-
+import NavBar from './NavBar';
 
 
 
@@ -7,10 +7,13 @@ import React from 'react';
 
 
 function HomePage() {
+
+
   
   return (
     <div className='pagecontainer container'>
-       <h1>Hola</h1>
+        <NavBar></NavBar>
+       
     </div>
   );
 }

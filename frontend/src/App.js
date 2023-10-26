@@ -11,8 +11,8 @@ function App() {
 
     <Router>
    
-      <div className="container">
-        <div className="app">
+      <div >
+        <div >
           <Routes>
             <Route path="/" element={<HomePage/>} />
             
