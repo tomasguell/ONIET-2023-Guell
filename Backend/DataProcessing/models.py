@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.core.validators import MaxValueValidator, MinValueValidator
 # Create your models here.
 
 class Empresa(models.Model):
@@ -11,7 +11,6 @@ class Empresa(models.Model):
         verbose_name_plural = "Empresas"
         verbose_name = "Empresa"
 
-from django.core.validators import MaxValueValidator, MinValueValidator
 class Registro(models.Model):
     mes = models.PositiveIntegerField(
         verbose_name="Mes",
