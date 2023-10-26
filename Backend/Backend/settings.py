@@ -202,7 +202,8 @@ JAZZMIN_SETTINGS = {
         "auth": "fas fa-users-cog",
         "auth.user": "fas fa-user",
         "auth.Group": "fas fa-users",
-        "ElectroStockApp.Box":"fas fa-box",
+        "DataProcessing.Empresa":"fas fa-building",
+        "DataProcessing.Registro":"fas fa-clipboard-list",
 
     },
 
@@ -225,9 +226,6 @@ JAZZMIN_SETTINGS = {
     # Whether to show the UI customizer on the sidebar
     "show_ui_builder": False,
 
-    "usermenu_links": [
-        {"name": "Token", "url": "http://127.0.0.1:8000/admin/ElectroStockApp/tokensignup/", "new_window": False, "icon":"fas fa-user-secret",},
-    ],
     
     ###############
     # Change view #
