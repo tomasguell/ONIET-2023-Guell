@@ -2,7 +2,8 @@ from django.urls import include, path
 from rest_framework import routers
 from .views import (
     EmpresaListCreateView,
-    RegistroListCreateView
+    RegistroListCreateView,
+    dataProccessing
 )
 
 # router = routers.DefaultRouter()
@@ -18,4 +19,5 @@ urlpatterns = [
         RegistroListCreateView.as_view(),
         name="RegistroListCreateView",
     ),
+    path('dataProccessing/', dataProccessing, name='dataProccessing')
 ]
