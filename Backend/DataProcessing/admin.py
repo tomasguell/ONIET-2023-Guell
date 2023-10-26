@@ -26,16 +26,17 @@ from django.db.models import Max
 from django.contrib.auth.hashers import make_password
 from import_export import resources, fields
 from import_export.widgets import ManyToManyWidget
-
+from import_export.fields import Field
+from import_export.widgets import ForeignKeyWidget
 class RegistroResource(resources.ModelResource):
     id = resources.Field(column_name="Registro", attribute="id")
     mes = resources.Field(column_name="Mes", attribute="mes")
     ProduccionTotal = resources.Field(column_name="ProduccionTotal", attribute="ProduccionTotal")
-    CantidadPiezasConFallas = resources.Field(column_name="CantidadPiezasConFallas", attribute="CantidadPiezasConFallas")
-    empresa = resources.Field(
-        column_name="Empresa",
-        attribute="empresa",
-    )
+    CantidadPiezasConFallas = resources.Field(column_name="CantidaPiezasConFallas", attribute="CantidadPiezasConFallas")
+    empresa = Field(
+        column_name='Empresa',
+        attribute='empresa',
+        widget=ForeignKeyWidget(model=Empresa, field='nombre'))
 
     class Meta:
         model = Registro
