@@ -7,6 +7,8 @@ import { useEffect,useState, React } from 'react';
 
 function Empresas() {
 
+
+    
     const [data, setData] = useState(null); // Estado para almacenar los datos
     const [loading, setLoading] = useState(true); // Estado para controlar la carga
   
