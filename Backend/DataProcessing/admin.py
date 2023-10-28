@@ -26,6 +26,7 @@ class EmpresaAdmin(ImportExportActionModelAdmin):
     list_filter = (
         "nombre",
     )
+    #ordering = ("-ProduccionTotal",)
 
     def CantidadPiezasOK(self, obj):
         produccion = Registro.objects.filter(empresa=obj).aggregate(
@@ -45,12 +46,16 @@ class EmpresaAdmin(ImportExportActionModelAdmin):
         fallas = Registro.objects.filter(empresa=obj).aggregate(
             total=models.Sum("CantidadPiezasConFallas")
         )["total"]
+        if fallas is None:
+            fallas = 0
         return fallas
     
     def ProduccionTotal(self, obj):
         produccion = Registro.objects.filter(empresa=obj).aggregate(
             total=models.Sum("ProduccionTotal")
         )["total"]
+        if produccion is None:
+            produccion = 0
         return produccion
 
     def PiezasOK(self, obj):
@@ -66,7 +71,10 @@ class EmpresaAdmin(ImportExportActionModelAdmin):
             produccion = 0
         CantidadPiezasOK = produccion - fallas
         print(CantidadPiezasOK, produccion)
-        PiezasOK = CantidadPiezasOK / produccion 
+        try:
+            PiezasOK = CantidadPiezasOK / produccion 
+        except:
+            PiezasOK = 0
         return PiezasOK
     
     def PiezasError(self, obj):
@@ -82,9 +90,15 @@ class EmpresaAdmin(ImportExportActionModelAdmin):
             produccion = 0
         CantidadPiezasOK = produccion - fallas
         PiezasOK = CantidadPiezasOK / produccion 
-        PiezasError= fallas / produccion
+        try:
+            PiezasOK = CantidadPiezasOK / produccion 
+        except:
+            PiezasOK = 0
+        try:
+            PiezasError= fallas / produccion
+        except:
+            PiezasError = 0
         return PiezasError
-
 
 class RegistroResource(resources.ModelResource):
     id = resources.Field(column_name="Registro", attribute="id")
